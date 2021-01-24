@@ -25,9 +25,8 @@ def padlock():
     if request.method == "POST":
         timeTaken = 0
         outputText = ""
+        outputFilename = ""
         failed = ""
-        outputFilePath = ""
-        failed = "failed"
 
         process = request.form["processInput"]
         dataFormat = request.form["dataFormatInput"]
@@ -51,79 +50,92 @@ def padlock():
                 try:
                     outputText, timeTaken = multicrypt.encrypt(plaintext=inputArea, passKey=key, cipher=cipher,
                             dataformat=dataFormat, cipherMode=cipherMode)
-                    failed = ""
                 except Exception as e:
                     outputText = "ERROR: Encryption failed!"
+                    failed = "failed"
                     print(e)
 
             elif dataFormat == "Files":
                 filename = secure_filename(fileUploaded.filename)
-                # Save the file in path provided
+                # Save the file in the upload folder
                 fileUploaded.save(os.path.join(app.config['UPLOAD_PATH'], filename))
                 try:
                     outputFilePath, timeTaken = multicrypt.encrypt(filename=filename,
                         filepath=UPLOAD_PATH, passKey=key, cipher=cipher,
                             dataformat=dataFormat)
-                    failed = ""
-                    outputText = Markup("File encryption successful!<br>Filename: " + os.path.basename(outputFilePath))
+
+                    # Remove path from output file and return just the filename
+                    outputFilename = os.path.basename(outputFilePath)
+                    outputText = Markup("File encryption successful!<br>Filename: " + outputFilename)
                 except Exception as e:
                     outputText = "ERROR: File encryption failed!"
+                    failed = "failed"
                     print(e)
 
             elif dataFormat == "Images":
                 filename = secure_filename(fileUploaded.filename)
-                full_filepath = os.path.join(app.config['UPLOAD_PATH'], filename)
-                # Save the file in path provided
-                fileUploaded.save(full_filepath)
+                # Save the file in the upload folder
+                fileUploaded.save(os.path.join(app.config['UPLOAD_PATH'], filename))
                 try:
                     outputFilePath, timeTaken = multicrypt.encrypt(filename=filename,
                         filepath=UPLOAD_PATH, passKey=key, cipher=cipher,
                             dataformat=dataFormat)
-                    failed = ""
-                    outputText = Markup("Image encryption successful!<br>Filename: " + os.path.basename(outputFilePath))
+
+                    # Remove path from output file and return just the filename
+                    outputFilename = os.path.basename(outputFilePath)
+                    outputText = Markup("Image encryption successful!<br>Filename: " + outputFilename)
                 except Exception as e:
                     outputText = "ERROR: Image encryption failed!"
+                    failed = "failed"
                     print(e)
         else:
+            """
+            Decryption
+            """
             if dataFormat == "Messages":
                 try:
                     outputText, timeTaken = multicrypt.decrypt(ciphertext=inputArea, passKey=key, cipher=cipher,
                             dataformat=dataFormat, cipherMode=cipherMode)
-                    failed = ""
                 except Exception as e:
                     outputText = "ERROR: Decryption failed!"
+                    failed = "failed"
                     print(e)
 
             elif dataFormat == "Files":
                 filename = secure_filename(fileUploaded.filename)
-                # Save the file in path provided
+                # Save the file in the upload folder
                 fileUploaded.save(os.path.join(app.config['UPLOAD_PATH'], filename))
                 try:
                     outputFilePath, timeTaken = multicrypt.decrypt(filename=filename,
                         filepath=UPLOAD_PATH, passKey=key, cipher=cipher,
                             dataformat=dataFormat)
-                    failed = ""
-                    outputText = Markup("File decryption successful!<br>Filename: " + os.path.basename(outputFilePath))
+
+                    # Remove path from output file and return just the filename
+                    outputFilename = os.path.basename(outputFilePath)
+                    outputText = Markup("File decryption successful!<br>Filename: " + outputFilename)
                 except Exception as e:
                     outputText = "ERROR: File decryption failed!"
+                    failed = "failed"
                     print(e)
 
             elif dataFormat == "Images":
                 filename = secure_filename(fileUploaded.filename)
-                filepath = os.path.join(app.config['UPLOAD_PATH'], filename)
-                # Save the file in path provided
-                fileUploaded.save(filepath)
+                # Save the file in the upload folder
+                fileUploaded.save(os.path.join(app.config['UPLOAD_PATH'], filename))
                 try:
                     outputFilePath, timeTaken = multicrypt.decrypt(filename=filename,
                         filepath=UPLOAD_PATH, passKey=key, cipher=cipher,
                             dataformat=dataFormat)
-                    failed = ""
-                    outputText = Markup("Image decryption successful!<br>Filename: " + os.path.basename(outputFilePath))
+
+                    # Remove path from output file and return just the filename
+                    outputFilename = os.path.basename(outputFilePath)
+                    outputText = Markup("Image decryption successful!<br>Filename: " + outputFilename)
                 except Exception as e:
                     outputText = "ERROR: Image decryption failed!"
+                    failed = "failed"
                     print(e)
 
-        # Format time
+        # Format time is it is not 0
         if timeTaken != 0:
             timeTakenString = "Time taken: " + time.strftime('%M:%S', time.gmtime(timeTaken))
         else:
@@ -132,8 +144,8 @@ def padlock():
         return render_template("padlock.html", inputText=inputArea,
             outputText=outputText, failed=failed, timeTakenString=timeTakenString,
             dataFormatInput=dataFormat, cipherInput=cipher, cipherModeInput=cipherMode,
-            outputImage=outputFilePath)
+            outputFilePath=outputFilePath, outputFilename=outputFilename)
 
     # Initial template when site is started up
-    return render_template("padlock.html", timeTaken="", dataFormatInput="Messages",
-        cipherInput="Caesar Cipher", cipherModeInput="Classic", outputImage="")
+    return render_template("padlock.html", dataFormatInput="Messages",
+        cipherInput="Caesar Cipher", cipherModeInput="Classic")

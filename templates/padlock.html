@@ -144,14 +144,14 @@ Author: Suraj Kothari
                             <div class="output-top-content justify-content-between">
                                 <!-- Time taken -->
                                 <h5 id="timeTakenString" class="time-label">{{timeTakenString}}</h5>
-                                <a id="outputBtn" href="{{outputImage}}" download="{{outputImage}}" class="btn output-button" onclick="copyOutput()" ></a>
+                                <a id="outputBtn" href="{{outputFilePath}}" download="{{outputFilename}}" class="btn output-button" onclick="copyOutput()" ></a>
                             </div>
                         </div>
                         <div class="section-body">
                             <textarea id="outputArea" class="body-textarea {{failed}}" spellcheck="false" name="name" rows="8" disabled>{{outputText}}</textarea>
                             <h5 id="outputFileArea" class="body-file-output-area {{failed}}">
                                 {{outputText}}
-                                <img id="outputImage" class="output-image" src="{{outputImage}}" alt="">
+                                <img id="outputImage" class="output-image" src="{{outputFilePath}}" alt="">
                             </h5>
                         </div>
                     </div>
