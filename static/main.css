@@ -1,0 +1,298 @@
+/*
+Padlock - CSS
+Author: Suraj Kothari
+*/
+
+/* Roboto font */
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+/* Source code font */
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap');
+
+body {
+    background-color: #1D1D1D;
+    color: #fff;
+    font-family: Roboto, sans-serif;
+}
+
+.padlock-header {
+    padding: 16px 64px;
+    background-color: #2A2F33;
+}
+
+.padlock-logo {
+    font-weight: bold;
+    color: #FFB300;
+}
+
+.padlock-body {
+    padding: 48px 5%;
+}
+
+
+.main-section {
+    padding: 16px;
+    background-color: #2D2D2D;
+    margin: 5% 1%;
+}
+
+.output-top-content {
+    display: flex;
+}
+
+
+/* Move columns vertically */
+@media only screen and (max-width: 900px) {
+    .row {
+        display: block;
+    }
+}
+
+/* Move button and output top text vertically */
+@media only screen and (max-width: 1100px) {
+    .output-top-content {
+        display: block;
+        text-align: center;
+    }
+
+    .output-button {
+        margin: 10px 0;
+    }
+}
+
+
+.section-title {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    color: #FFB300;
+    margin-bottom: 27px;
+}
+
+.section-top {
+    border-bottom: 3px solid #3E3E3E;
+}
+
+/* Drop Down */
+/* Reference: https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_js_dropdown */
+.dropdown-btn {
+  color: #FFB300;
+  font-size: 20px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  background: none;
+  outline: none;
+}
+
+.dropdown-btn:focus {
+    outline: none;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  font-weight: bold;
+}
+
+.dropdown-body {
+  display: none;
+  position: absolute;
+  background-color: #F5B250;
+  color: #2F2F2F;
+  min-width: 220px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  cursor: pointer;
+}
+
+.dropdown-body a {
+  padding: 12px 28px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown a:hover:not(.dropdown-dividers) {
+    background-color: #DDD;
+}
+
+.small-dropdown {
+    font-size: 16px;
+}
+
+.show {
+    display: block;
+}
+
+.section-body {
+    padding-top: 16px;
+}
+
+.body-textarea {
+    font-family: "Source Code Pro", monospace;
+    font-weight: bold;
+    font-size: 16px;
+    color: #CFD8DC;
+    width: 100%;
+    padding: 16px;
+    resize: none;
+    border: 2px solid #FFF;
+    border-radius: 4px;
+    background: none;
+    outline: none;
+}
+
+
+/* Style scorllbar for text area */
+.body-textarea::-webkit-scrollbar {
+    width: 0.5em;
+}
+
+.body-textarea::-webkit-scrollbar-thumb {
+  background-color: #F5B250;
+  border-radius: 10px;
+}
+
+.body-textarea::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+}
+
+.key-area {
+    padding: 0 5px;
+}
+
+.mode-area {
+    border-top: 3px solid #3E3E3E;
+    /* border-bottom: 3px solid #3E3E3E; */
+    padding: 10px 5px;
+    margin-top: 16px;
+}
+
+.mode-input-label {
+    width: 40px;
+    font-size: 16px;
+    font-weight: bold;
+    padd
+}
+
+.key-error {
+    border-left: 3px solid #F44336;
+}
+
+.key-input-label {
+    width: 40px;
+    font-size: 16px;
+    font-weight: bold;
+    border-right: 2px solid #3E3E3E;
+}
+
+.extra-keys {
+    width: 52px;
+}
+
+.error-input-label {
+    margin-left: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #F44336;
+    display: none;
+}
+
+.key-input {
+    font-family: 'Source Code Pro', monospace;
+    font-weight: bold;
+    padding: 12px 16px;
+    margin-bottom: 10px;
+    outline: none;
+    border-radius: 4px;
+}
+
+.encrypt-decrypt-mode {
+    text-align: center;
+    margin-top: 20px;
+    padding: 0 5px;
+}
+
+.process-mode {
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.process-mode::selection {
+    background-color: transparent;
+    color: #000;
+}
+
+.dropdown-dividers {
+    color: #2F2F2F;
+    padding: 12px 5px !important;
+    border-top: 1px solid #2D2D2D;
+    border-bottom: 1px solid #2D2D2D;
+}
+
+.dropdown-dividers:hover {
+    color: #2F2F2F;
+}
+
+.output-button {
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    color: #2F2F2F;
+    margin-bottom: 10px;
+    background-color: #FBB300;
+}
+
+.output-button:hover {
+    background-color: #FFC107;
+}
+
+.time-label {
+    margin: auto 0;
+    font-size: 16px;
+}
+
+.failed {
+    color: #F44336 !important;
+}
+
+.upload-text {
+    margin: 20px 0;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.file-uploaded-text {
+    padding: 0 10px;
+    font-weight: bold;
+    font-style: italic;
+    color: #FFB300;
+    display: none;
+}
+
+.file-input-box {
+    border: 5px dashed #3E3E3E;
+    display: none;
+    padding: 60px 0;
+    text-align: center;
+    margin: 0 5px;
+}
+
+.output-image {
+    margin: 10px 0;
+    width: 100%;
+    border: 5px solid #3E3E3E;
+}
+
+.footer {
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  height: 60px; /* Set the fixed height of the footer here */
+  line-height: 60px; /* Vertically center the text there */
+  background-color: #2A2F33;
+  color: #8C8C8C;
+}
