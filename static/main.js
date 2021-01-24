@@ -1,27 +1,33 @@
 /*
-Padlock - JavaScript
+Padlock Web Version - JavaScript
 Author: Suraj Kothari
 */
-// Initialises the site upon refresh
+
 function initialiseSite() {
+    /* Initialises the site upon refresh */
     if (document.getElementById("dataFormatInput").value == "Messages") {
         document.getElementById("outputFileArea").style.display = "none";
+        // Set output button to a copy button
         document.getElementById("outputBtn").innerHTML = "Copy message";
         document.getElementById("outputBtn").classList.add("copy");
         // Hide image
         document.getElementById("outputImage").style.display = "none";
     }
 
-    if (document.getElementById("dataFormatInput").value == "Files") {
+    else if (document.getElementById("dataFormatInput").value == "Files") {
         document.getElementById("fileInputArea").style.display = "block";
+        // Hide input and output text boxes
         document.getElementById("inputArea").style.display = "none";
         document.getElementById("outputArea").style.display = "none";
         document.getElementById("uploadText").innerHTML = "Upload a file (any file type)";
         document.getElementById("outputBtn").innerHTML = "Download File";
         // Hide image
         document.getElementById("outputImage").style.display = "none";
-    } else if (document.getElementById("dataFormatInput").value == "Images") {
+    }
+
+    else if (document.getElementById("dataFormatInput").value == "Images") {
         document.getElementById("fileInputArea").style.display = "block";
+        // Hide input and output text boxes
         document.getElementById("inputArea").style.display = "none";
         document.getElementById("outputArea").style.display = "none";
         document.getElementById("uploadText").innerHTML = "Upload an image (.PNG or .JPG)";
@@ -31,7 +37,7 @@ function initialiseSite() {
         document.getElementById("outputImage").style.display = "block";
     }
 
-    // Hide the extra keys if not triple des selected
+    // Hide the extra keys if not Triple DES is selected
     if (document.getElementById("cipherInput").value == "Triple DES Cipher") {
         document.getElementById("tDESKeys").style.display = "block";
     } else {
@@ -43,126 +49,159 @@ function initialiseSite() {
 function showDataFormatDropdown() {document.getElementById("dataFormatDropdown").classList.toggle("show");}
 function setMessageOption() {
     document.getElementById("activeDataFormat").innerHTML = "MESSAGES &#x25BC;";
+    document.getElementById("dataFormatInput").setAttribute("value", "Messages");
+    // Set output button to a copy button
     document.getElementById("outputBtn").classList.add("copy");
     document.getElementById("outputBtn").value = "Copy Message";
+    // Show mode area and input/output text boxes
     document.getElementById("modeArea").style.display = "block";
-    document.getElementById("Base64ModeLabel").style.display = "none";
+    document.getElementById("inputArea").style.display = "block";
+    document.getElementById("outputArea").style.display = "block";
+    // Hide the file mode dividers for the cipher mode dropdown
     document.getElementById("fileModeDivider1").style.display = "none";
     document.getElementById("fileModeDivider2").style.display = "none";
-    document.getElementById("inputArea").style.display = "block";
+    // Hide Base64 mode
+    document.getElementById("Base64ModeLabel").style.display = "none";
+    // Hide file input area
     document.getElementById("fileInputArea").style.display = "none";
-    document.getElementById("outputArea").style.display = "block";
-    document.getElementById("dataFormatInput").setAttribute("value", "Messages");
+
     document.getElementById("inputArea").innerHTML = "";
     document.getElementById("outputArea").innerHTML = "";
     document.getElementById("outputFileArea").style.display = "none";
 }
+
 function setFileOption() {
     document.getElementById("activeDataFormat").innerHTML = "FILES &#x25BC;";
+    document.getElementById("dataFormatInput").setAttribute("value", "Files");
+    // Set output button to a download button
     document.getElementById("outputBtn").classList.remove("copy");
     document.getElementById("outputBtn").innerHTML = "Download File";
+    // Show mode area, but hide input/output text boxes
     document.getElementById("modeArea").style.display = "block";
-    document.getElementById("Base64ModeLabel").style.display = "block";
+    document.getElementById("inputArea").style.display = "none";
+    document.getElementById("outputArea").style.display = "none";
+    // Show the file mode dividers for the cipher mode dropdown
     document.getElementById("fileModeDivider1").style.display = "block";
     document.getElementById("fileModeDivider2").style.display = "block";
-    document.getElementById("inputArea").style.display = "none";
+    // Show Base64 mode
+    document.getElementById("Base64ModeLabel").style.display = "block";
+    // Show file input area and hide the uploaded file text
     document.getElementById("fileInputArea").style.display = "block";
-    document.getElementById("fileInput").removeAttribute("accept");
     document.getElementById("fileUploadedText").style.display = "none";
-    document.getElementById("outputArea").style.display = "none";
-    document.getElementById("dataFormatInput").setAttribute("value", "Files");
+    document.getElementById("fileInput").removeAttribute("accept");
+
     document.getElementById("uploadText").innerHTML = "Upload a file (any file type)";
     document.getElementById("timeTakenString").innerHTML = "";
     document.getElementById("outputFileArea").innerHTML = "";
-    // Add download attribute to button
-
 }
+
 function setImageOption() {
     document.getElementById("activeDataFormat").innerHTML = "IMAGES &#x25BC;";
+    document.getElementById("dataFormatInput").setAttribute("value", "Images");
+    // Set output button to a download button
     document.getElementById("outputBtn").classList.remove("copy");
     document.getElementById("outputBtn").innerHTML = "Download Image";
+    // Hide mode area and input/output text boxes
     document.getElementById("modeArea").style.display = "none";
     document.getElementById("inputArea").style.display = "none";
-    document.getElementById("fileInputArea").style.display = "block";
-    document.getElementById("fileInput").setAttribute("accept", ".png,.jpg");
-    document.getElementById("fileUploadedText").style.display = "none";
     document.getElementById("outputArea").style.display = "none";
-    document.getElementById("dataFormatInput").setAttribute("value", "Images");
+    // Show file input area and hide the uploaded image text
+    document.getElementById("fileInputArea").style.display = "block";
+    document.getElementById("fileUploadedText").style.display = "none";
+    document.getElementById("fileInput").setAttribute("accept", ".png,.jpg");
+
     document.getElementById("uploadText").innerHTML = "Upload an image (.PNG or .JPG)";
     document.getElementById("timeTakenString").innerHTML = "";
     document.getElementById("outputFileArea").innerHTML = "";
 }
 
+
 // Set cipher dropdown options
 function showCipherDropdown() {document.getElementById("cipherDropdown").classList.toggle("show");}
 function setCaesarOption() {
     document.getElementById("activeCipher").innerHTML = "Caesar Cipher &#x25BC;";
+    document.getElementById("cipherInput").setAttribute("value", "Caesar Cipher");
     // Hide Triple DES keys
     document.getElementById("tDESKeys").style.display = "none";
     document.getElementById("ASCIIModeLabel").style.display = "block";
+    // Set the number of rows of the input/output text boxes to the minimum
     document.getElementById("inputArea").rows = "8";
-    document.getElementById("fileInputArea").style.padding = "60px 0";
     document.getElementById("outputArea").rows = "8";
-    document.getElementById("cipherInput").setAttribute("value", "Caesar Cipher");
+    document.getElementById("fileInputArea").style.padding = "60px 0";
 }
+
 function setVigenereOption() {
     document.getElementById("activeCipher").innerHTML = "Vigenere Cipher &#x25BC;";
+    document.getElementById("cipherInput").setAttribute("value", "Vigenere Cipher");
     // Hide Triple DES keys
     document.getElementById("tDESKeys").style.display = "none";
     document.getElementById("ASCIIModeLabel").style.display = "block";
+    // Set the number of rows of the input/output text boxes to the minimum
     document.getElementById("inputArea").rows = "8";
-    document.getElementById("fileInputArea").style.padding = "60px 0";
     document.getElementById("outputArea").rows = "8";
-    document.getElementById("cipherInput").setAttribute("value", "Vigenere Cipher");
+    document.getElementById("fileInputArea").style.padding = "60px 0";
 }
+
 function setDESOption() {
     document.getElementById("activeCipher").innerHTML = "DES &#x25BC;";
+    document.getElementById("cipherInput").setAttribute("value", "DES Cipher");
     // Hide Triple DES keys
     document.getElementById("tDESKeys").style.display = "none";
     document.getElementById("ASCIIModeLabel").style.display = "none";
+    // Set the number of rows of the input/output text boxes to the minimum
     document.getElementById("inputArea").rows = "8";
-    document.getElementById("fileInputArea").style.padding = "60px 0";
     document.getElementById("outputArea").rows = "8";
-    document.getElementById("cipherInput").setAttribute("value", "DES Cipher");
-    // Remove ASCII mode
+    document.getElementById("fileInputArea").style.padding = "60px 0";
+
+    // Set default mode to classic
     setClassicMode();
 }
+
 function setTDESOption() {
     document.getElementById("activeCipher").innerHTML = "Triple DES &#x25BC;";
+    document.getElementById("cipherInput").setAttribute("value", "Triple DES Cipher");
     // Hide Triple DES keys
     document.getElementById("tDESKeys").style.display = "block";
     document.getElementById("ASCIIModeLabel").style.display = "none";
+    // Set the number of rows of the input/output text boxes to the maximum
     document.getElementById("inputArea").rows = "15";
-    document.getElementById("fileInputArea").style.padding = "150px 0";
     document.getElementById("outputArea").rows = "15";
-    document.getElementById("cipherInput").setAttribute("value", "Triple DES Cipher");
-    // Remove ASCII mode
+    document.getElementById("fileInputArea").style.padding = "150px 0";
+
+    // Set default mode to classic
     setClassicMode();
 }
+
 function setAESOption() {
     document.getElementById("activeCipher").innerHTML = "AES &#x25BC;";
+    document.getElementById("cipherInput").setAttribute("value", "AES Cipher");
     // Hide Triple DES keys
     document.getElementById("tDESKeys").style.display = "none";
     document.getElementById("ASCIIModeLabel").style.display = "none";
+    // Set the number of rows of the input/output text boxes to the minimum
     document.getElementById("inputArea").rows = "8";
-    document.getElementById("fileInputArea").style.padding = "60px 0";
     document.getElementById("outputArea").rows = "8";
-    document.getElementById("cipherInput").setAttribute("value", "AES Cipher");
-    // Remove ASCII mode
+    document.getElementById("fileInputArea").style.padding = "60px 0";
+
+    // Set default mode to classic
     setClassicMode();
 }
+
 function setRC4Option() {
     document.getElementById("activeCipher").innerHTML = "RC4 &#x25BC;";
+    document.getElementById("cipherInput").setAttribute("value", "RC4 Cipher");
     // Hide Triple DES keys
     document.getElementById("tDESKeys").style.display = "none";
     document.getElementById("ASCIIModeLabel").style.display = "none";
+    // Set the number of rows of the input/output text boxes to the minimum
     document.getElementById("inputArea").rows = "8";
-    document.getElementById("fileInputArea").style.padding = "60px 0";
     document.getElementById("outputArea").rows = "8";
-    document.getElementById("cipherInput").setAttribute("value", "RC4 Cipher");
-    // Remove ASCII mode
+    document.getElementById("fileInputArea").style.padding = "60px 0";
+
+    // Set default mode to classic
     setClassicMode();
 }
+
 
 // Set Cipher mode dropwdown
 function showCipherModeDropdown() {document.getElementById("cipherModeDropdown").classList.toggle("show");}
@@ -180,28 +219,28 @@ function setBase64Mode() {
 }
 
 
-// Close the dropdown if the user clicks outside of it
-// Reference: https://www.w3schools.com/howto/howto_js_dropdown.asp
 window.onclick = function(event) {
-  if (!event.target.matches('.dropdown-btn')) {
-    var dropdowns = document.getElementsByClassName("dropdown-body");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
-      }
+    // Close any dropdown if the user clicks outside of it
+    // Reference: https://www.w3schools.com/howto/howto_js_dropdown.asp
+    if (!event.target.matches('.dropdown-btn')) {
+        var dropdowns = document.getElementsByClassName("dropdown-body");
+        for (var i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+            }
+        }
     }
-  }
 }
 
 function checkInputValidation() {
-    // Check input text box
+    // Check input text box is not empty
     if (document.getElementById("inputArea").value == "" &&
         document.getElementById("dataFormatInput").value == "Messages") {return false;}
 
-    // Check first key
+    // Check first key is not empty
     if (document.getElementById("keyInput").value == "") {return false;}
+
     // Check if length of key is less than 8
     if (document.getElementById("keyInput").value.length < 8) {
         document.getElementById("keyArea").classList.add("key-error");
@@ -213,7 +252,7 @@ function checkInputValidation() {
         document.getElementById("key1Error").style.display = "none";
     }
 
-    // Check Triple DES extra keys validation
+    // Check validation for the extra keys in Triple DES
     if (document.getElementById("cipherInput").value == "Triple DES Cipher") {
         if (document.getElementById("keyInput2").value == "") {return false;}
         if (document.getElementById("keyInput2").value.length < 8) {
@@ -225,6 +264,7 @@ function checkInputValidation() {
             document.getElementById("keyArea2").classList.remove("key-error");
             document.getElementById("key2Error").style.display = "none";
         }
+
         if (document.getElementById("keyInput3").value == "") {return false;}
         if (document.getElementById("keyInput3").value.length < 8) {
             document.getElementById("keyArea3").classList.add("key-error");
@@ -237,7 +277,7 @@ function checkInputValidation() {
         }
     }
 
-    // Check if key is alphabetic using regex
+    // Check if the key is only alphabetic using regex for Vigenere Cipher
     if (document.getElementById("cipherInput").value == "Vigenere Cipher" &&
         document.getElementById("cipherModeInput").value == "Classic" &&
         !document.getElementById("keyInput").value.match(/^[A-Za-z]+$/)) {
@@ -248,14 +288,15 @@ function checkInputValidation() {
         return false;
     }
 
+    // All validation tests passed
     return true;
 }
 
 // Set encrypt/decrypt modes
 function startEncrypt() {
-    // Checks input validation before submitting
+    // Check all input validations are passed before submitting
     if (checkInputValidation()) {
-        // Check input validation for files and images
+        // Check file size validation
         if (document.getElementById("dataFormatInput").value == "Files" ||
             document.getElementById("dataFormatInput").value == "Images") {
             var filename = document.getElementById("fileInput").files[0].name;
@@ -282,12 +323,13 @@ function startEncrypt() {
 }
 function startDecrypt() {
     if (checkInputValidation()) {
-        // NOTE: For files and images, they can be any size if decrypting
+        // NOTE: For files and images, they can be any size when decrypting
 
         if (document.getElementById("dataFormatInput").value == "Files" ||
             document.getElementById("dataFormatInput").value == "Images") {
-            var filename = document.getElementById("fileInput").files[0].name;
+            // Set the file uploaded text
 
+            var filename = document.getElementById("fileInput").files[0].name;
             document.getElementById("fileUploadedText").style.color = "#FBB300";
             if (document.getElementById("dataFormatInput").value == "Images") {
                 document.getElementById("fileUploadedText").innerHTML = "Image uploaded: " + filename;
@@ -314,12 +356,12 @@ function copyOutput() {
 }
 
 function uploadFile() {
-    // Clicks the file import form
+    // Click the file import form
     document.getElementById("fileInput").click();
-    // Once user has chosen the file, change the input for flask
+
     $('#fileInput').change(function(e) {
+        // Set the file uploaded text after user is done with selecting a file
         var filename = e.target.files[0].name;
-        // var filesize = e.target.files[0].size;
         document.getElementById("fileUploadedText").style.display = "block";
 
         document.getElementById("fileUploadedText").style.color = "#FBB300";

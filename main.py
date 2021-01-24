@@ -1,5 +1,5 @@
 """
-Padlock - Python w/ Flask
+Padlock Web Version - Python with Flask
 Author: Suraj Kothari
 """
 

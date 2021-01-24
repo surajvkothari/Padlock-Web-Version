@@ -1,8 +1,7 @@
 <!--
-Padlock - HTML
+Padlock Web Version - HTML
 Author: Suraj Kothari
 -->
-
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -16,10 +15,8 @@ Author: Suraj Kothari
             rel="stylesheet"
             integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
             crossorigin="anonymous">
-        <!-- Padlock CSS -->
-        <link rel="stylesheet" href="/static/main.css">
-
-        <title>Padlock</title>
+        <link rel="stylesheet" href="/static/main.css"> <!-- Padlock CSS -->
+        <title>Padlock - Web Version</title>
     </head>
     <body onload="initialiseSite()">
         <!-- Top header -->
@@ -29,13 +26,16 @@ Author: Suraj Kothari
 
         <!-- Main body -->
         <div class="container-fluid padlock-body">
+            <!-- Main form -->
             <form id="padlockForm" action="/padlock" method="POST" enctype="multipart/form-data">
+                <!-- Inputs to be submitted to Flask -->
                 <input id="dataFormatInput" type="hidden" name="dataFormatInput" value={{dataFormatInput}}>
                 <input id="cipherInput" type="hidden" name="cipherInput" value="{{cipherInput}}">
                 <input id="cipherModeInput" type="hidden" name="cipherModeInput" value={{cipherModeInput}}>
                 <input id="processInput" type="hidden" name="processInput" value="">
-                <!-- <input id="!<" type="hidden" name="filenameInput" value=""> -->
                 <input id="fileInput" type="file" name="fileInput" style="display: none;">
+
+                <!-- Main row -->
                 <div class="row padlock-main-row">
                     <!-- Input section -->
                     <div class="col input-section main-section">
@@ -44,7 +44,6 @@ Author: Suraj Kothari
                             <!-- Data format dropdown -->
                             <div class="dropdown">
                                 <h1 id="activeDataFormat" onclick="showDataFormatDropdown()" class="dropdown-btn">{{dataFormatInput.upper()}} &#x25BC;</h1>
-
                                 <div id="dataFormatDropdown" class="dropdown-body">
                                     <a onclick="setMessageOption()">MESSAGES</a>
                                     <a onclick="setFileOption()">FILES</a>
@@ -56,9 +55,8 @@ Author: Suraj Kothari
                             <textarea id="inputArea" class="body-textarea" spellcheck="false" name="inputArea" form="padlockForm" rows="8" placeholder="Enter messages...">{{inputText}}</textarea>
                             <div id="fileInputArea" class="file-input-box">
                                 <h6 id="fileUploadedText" class="file-uploaded-text"></h6>
-                                <svg class="box__icon" xmlns="http://www.w3.org/2000/svg" width="50" height="43" viewBox="0 0 50 43" fill="#4CAF50">
-                                    <path d="M48.4 26.5c-.9 0-1.7.7-1.7 1.7v11.6h-43.3v-11.6c0-.9-.7-1.7-1.7-1.7s-1.7.7-1.7 1.7v13.2c0 .9.7 1.7 1.7 1.7h46.7c.9 0 1.7-.7 1.7-1.7v-13.2c0-1-.7-1.7-1.7-1.7zm-24.5 6.1c.3.3.8.5 1.2.5.4 0 .9-.2 1.2-.5l10-11.6c.7-.7.7-1.7 0-2.4s-1.7-.7-2.4 0l-7.1 8.3v-25.3c0-.9-.7-1.7-1.7-1.7s-1.7.7-1.7 1.7v25.3l-7.1-8.3c-.7-.7-1.7-.7-2.4 0s-.7 1.7 0 2.4l10 11.6z"></path>
-                                </svg>
+                                <!-- File upload icon -->
+                                <img src="/static/file_upload_icon.png" height="50">
                                 <h5 id="uploadText" class="upload-text" onclick="uploadFile()"></h5>
                             </div>
                         </div>
@@ -169,7 +167,7 @@ Author: Suraj Kothari
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
         <!-- Padlock JavaScript -->
         <script src="static/main.js"></script>
-        <!-- Jquery CDN -->
+        <!-- Jquery CDN (Google) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </body>
 </html>
