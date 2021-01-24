@@ -19,7 +19,15 @@ function initialiseSite() {
         // Hide input and output text boxes
         document.getElementById("inputArea").style.display = "none";
         document.getElementById("outputArea").style.display = "none";
-        document.getElementById("uploadText").innerHTML = "Upload a file (any file type)";
+
+        if (document.getElementById("cipherModeInput").value == "Base64") {
+            document.getElementById("uploadText").innerHTML = "Upload a file (any file type)";
+            document.getElementById("fileInput").removeAttribute("accept");
+        } else {
+            document.getElementById("uploadText").innerHTML = "Upload a file (.TXT)";
+            document.getElementById("fileInput").setAttribute("accept", ".txt");
+        }
+
         document.getElementById("outputBtn").innerHTML = "Download File";
         // Hide image
         document.getElementById("outputImage").style.display = "none";
@@ -31,6 +39,7 @@ function initialiseSite() {
         document.getElementById("inputArea").style.display = "none";
         document.getElementById("outputArea").style.display = "none";
         document.getElementById("uploadText").innerHTML = "Upload an image (.PNG or .JPG)";
+        document.getElementById("fileInput").setAttribute("accept", ".png,.jpg");
         document.getElementById("outputBtn").innerHTML = "Download Image";
 
         // Display image
@@ -88,9 +97,9 @@ function setFileOption() {
     // Show file input area and hide the uploaded file text
     document.getElementById("fileInputArea").style.display = "block";
     document.getElementById("fileUploadedText").style.display = "none";
-    document.getElementById("fileInput").removeAttribute("accept");
-
-    document.getElementById("uploadText").innerHTML = "Upload a file (any file type)";
+    // By default, the mode is classic, so only allow text files
+    document.getElementById("uploadText").innerHTML = "Upload a file (.TXT)";
+    document.getElementById("fileInput").setAttribute("accept", ".txt");
     document.getElementById("timeTakenString").innerHTML = "";
     document.getElementById("outputFileArea").innerHTML = "";
 }
@@ -108,9 +117,9 @@ function setImageOption() {
     // Show file input area and hide the uploaded image text
     document.getElementById("fileInputArea").style.display = "block";
     document.getElementById("fileUploadedText").style.display = "none";
-    document.getElementById("fileInput").setAttribute("accept", ".png,.jpg");
 
     document.getElementById("uploadText").innerHTML = "Upload an image (.PNG or .JPG)";
+    document.getElementById("fileInput").setAttribute("accept", ".png,.jpg");
     document.getElementById("timeTakenString").innerHTML = "";
     document.getElementById("outputFileArea").innerHTML = "";
 }
@@ -208,14 +217,28 @@ function showCipherModeDropdown() {document.getElementById("cipherModeDropdown")
 function setClassicMode() {
     document.getElementById("activeCipherMode").innerHTML = "Classic &#x25BC;";
     document.getElementById("cipherModeInput").setAttribute("value", "Classic");
+    // This mode only supports text files
+    if (document.getElementById("dataFormatInput").value == "Files") {
+        document.getElementById("uploadText").innerHTML = "Upload a file (.TXT)";
+        document.getElementById("fileInput").setAttribute("accept", ".txt");
+    }
 }
 function setASCIIMode() {
     document.getElementById("activeCipherMode").innerHTML = "ASCII &#x25BC;";
     document.getElementById("cipherModeInput").setAttribute("value", "ASCII");
+    // This mode only supports text files
+    if (document.getElementById("dataFormatInput").value == "Files") {
+        document.getElementById("uploadText").innerHTML = "Upload a file (.TXT)";
+        document.getElementById("fileInput").setAttribute("accept", ".txt");
+    }
 }
 function setBase64Mode() {
     document.getElementById("activeCipherMode").innerHTML = "Base 64 &#x25BC;";
     document.getElementById("cipherModeInput").setAttribute("value", "Base64");
+    // Base64 allows any file type
+    document.getElementById("uploadText").innerHTML = "Upload a file (any file type)";
+    document.getElementById("fileInput").removeAttribute("accept");
+
 }
 
 
@@ -355,20 +378,48 @@ function copyOutput() {
     }
 }
 
+
 function uploadFile() {
-    // Click the file import form
+    // Click the file input
     document.getElementById("fileInput").click();
+    document.getElementById("fileUploadedText").style.display = "block";
 
+    // When a user has selected a file, update the file input area
     $('#fileInput').change(function(e) {
-        // Set the file uploaded text after user is done with selecting a file
-        var filename = e.target.files[0].name;
-        document.getElementById("fileUploadedText").style.display = "block";
-
-        document.getElementById("fileUploadedText").style.color = "#FBB300";
-        if (document.getElementById("dataFormatInput").value == "Images") {
-            document.getElementById("fileUploadedText").innerHTML = "Image uploaded: " + filename;
-        } else {
-            document.getElementById("fileUploadedText").innerHTML = "File uploaded: " + filename;
-        }
+        updateFileInputArea();
     });
+}
+
+function updateFileInputArea() {
+    // Set the file uploaded text after user is done with selecting a file
+    var fileUploadedText = document.getElementById("fileUploadedText");
+    var filename = document.getElementById("fileInput").files[0].name;
+    var extension = filename.split('.').pop().toLowerCase();
+
+    // Check file uploaded is of a valid type
+    if (document.getElementById("dataFormatInput").value == "Files") {
+        // File must be a text file if Base64 is not chosen
+        if (document.getElementById("cipherModeInput").value != "Base64" &&
+        extension != "txt") {
+            fileUploadedText.style.color = "#F44336";
+            fileUploadedText.innerHTML = "File uploaded is not a text file!";
+            return 0;
+        }
+    }
+
+    // Check image uploaded is of a valid type
+    else {
+        if (extension != "png" && extension != "jpg") {
+            fileUploadedText.style.color = "#F44336";
+            fileUploadedText.innerHTML = "Image uploaded is not a PNG or JPG!";
+            return 0;
+        }
+    }
+
+    fileUploadedText.style.color = "#FBB300";
+    if (document.getElementById("dataFormatInput").value == "Images") {
+        fileUploadedText.innerHTML = "Image uploaded: " + filename;
+    } else {
+        fileUploadedText.innerHTML = "File uploaded: " + filename;
+    }
 }
