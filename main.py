@@ -64,7 +64,7 @@ def padlock():
                 try:
                     outputFilepath, timeTaken = multicrypt.encrypt(filename=filename,
                         filepath=UPLOAD_PATH, passKey=key, cipher=cipher,
-                            dataformat=dataFormat)
+                            dataformat=dataFormat, cipherMode=cipherMode)
 
                     # Remove path from output file and return just the filename
                     outputFilename = os.path.basename(outputFilepath)
@@ -110,7 +110,7 @@ def padlock():
                 try:
                     outputFilepath, timeTaken = multicrypt.decrypt(filename=filename,
                         filepath=UPLOAD_PATH, passKey=key, cipher=cipher,
-                            dataformat=dataFormat)
+                            dataformat=dataFormat, cipherMode=cipherMode)
 
                     # Remove path from output file and return just the filename
                     outputFilename = os.path.basename(outputFilepath)
