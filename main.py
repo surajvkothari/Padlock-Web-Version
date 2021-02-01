@@ -20,11 +20,13 @@ def clear_files():
 
 @app.route('/padlock', methods=['POST', 'GET'])
 def padlock():
+    # Remove files stored in uploads
     clear_files()
 
     if request.method == "POST":
         timeTaken = 0
         outputText = ""
+        outputFilepath = ""
         outputFilename = ""
         failed = ""
 
@@ -60,12 +62,12 @@ def padlock():
                 # Save the file in the upload folder
                 fileUploaded.save(os.path.join(app.config['UPLOAD_PATH'], filename))
                 try:
-                    outputFilePath, timeTaken = multicrypt.encrypt(filename=filename,
+                    outputFilepath, timeTaken = multicrypt.encrypt(filename=filename,
                         filepath=UPLOAD_PATH, passKey=key, cipher=cipher,
                             dataformat=dataFormat)
 
                     # Remove path from output file and return just the filename
-                    outputFilename = os.path.basename(outputFilePath)
+                    outputFilename = os.path.basename(outputFilepath)
                     outputText = Markup("File encryption successful!<br>Filename: " + outputFilename)
                 except Exception as e:
                     outputText = "ERROR: File encryption failed!"
@@ -77,12 +79,12 @@ def padlock():
                 # Save the file in the upload folder
                 fileUploaded.save(os.path.join(app.config['UPLOAD_PATH'], filename))
                 try:
-                    outputFilePath, timeTaken = multicrypt.encrypt(filename=filename,
+                    outputFilepath, timeTaken = multicrypt.encrypt(filename=filename,
                         filepath=UPLOAD_PATH, passKey=key, cipher=cipher,
                             dataformat=dataFormat)
 
                     # Remove path from output file and return just the filename
-                    outputFilename = os.path.basename(outputFilePath)
+                    outputFilename = os.path.basename(outputFilepath)
                     outputText = Markup("Image encryption successful!<br>Filename: " + outputFilename)
                 except Exception as e:
                     outputText = "ERROR: Image encryption failed!"
@@ -106,12 +108,12 @@ def padlock():
                 # Save the file in the upload folder
                 fileUploaded.save(os.path.join(app.config['UPLOAD_PATH'], filename))
                 try:
-                    outputFilePath, timeTaken = multicrypt.decrypt(filename=filename,
+                    outputFilepath, timeTaken = multicrypt.decrypt(filename=filename,
                         filepath=UPLOAD_PATH, passKey=key, cipher=cipher,
                             dataformat=dataFormat)
 
                     # Remove path from output file and return just the filename
-                    outputFilename = os.path.basename(outputFilePath)
+                    outputFilename = os.path.basename(outputFilepath)
                     outputText = Markup("File decryption successful!<br>Filename: " + outputFilename)
                 except Exception as e:
                     outputText = "ERROR: File decryption failed!"
@@ -123,12 +125,12 @@ def padlock():
                 # Save the file in the upload folder
                 fileUploaded.save(os.path.join(app.config['UPLOAD_PATH'], filename))
                 try:
-                    outputFilePath, timeTaken = multicrypt.decrypt(filename=filename,
+                    outputFilepath, timeTaken = multicrypt.decrypt(filename=filename,
                         filepath=UPLOAD_PATH, passKey=key, cipher=cipher,
                             dataformat=dataFormat)
 
                     # Remove path from output file and return just the filename
-                    outputFilename = os.path.basename(outputFilePath)
+                    outputFilename = os.path.basename(outputFilepath)
                     outputText = Markup("Image decryption successful!<br>Filename: " + outputFilename)
                 except Exception as e:
                     outputText = "ERROR: Image decryption failed!"
@@ -144,7 +146,7 @@ def padlock():
         return render_template("padlock.html", inputText=inputArea,
             outputText=outputText, failed=failed, timeTakenString=timeTakenString,
             dataFormatInput=dataFormat, cipherInput=cipher, cipherModeInput=cipherMode,
-            outputFilePath=outputFilePath, outputFilename=outputFilename)
+            outputFilepath=outputFilepath, outputFilename=outputFilename)
 
     # Initial template when site is started up
     return render_template("padlock.html", dataFormatInput="Messages",

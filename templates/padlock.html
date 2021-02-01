@@ -16,6 +16,13 @@ Author: Suraj Kothari
             integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
             crossorigin="anonymous">
         <link rel="stylesheet" href="/static/main.css"> <!-- Padlock CSS -->
+        <!-- Bootstrap JavaScript bundle -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+        <!-- Jquery CDN (Google) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <!-- Padlock JavaScript -->
+        <script src="static/main.js"></script>
+
         <title>Padlock - Web Version</title>
     </head>
     <body onload="initialiseSite()">
@@ -94,7 +101,7 @@ Author: Suraj Kothari
                                 <input id="keyInput" class="input-group input-group-sm key-input" type="text" name="keyInput" autocomplete="off" placeholder="Enter key...">
                             </div>
                             <!-- For Triple DES ONLY -->
-                            <div id="tDESKeys" class="">
+                            <div id="tDESKeys" style="display: none;">
                                 <div id="keyArea2" class="key-area">
                                     <div class="d-flex">
                                         <h5 class="key-input-label extra-keys">KEY 2</h5>
@@ -144,14 +151,14 @@ Author: Suraj Kothari
                             <div class="output-top-content justify-content-between">
                                 <!-- Time taken -->
                                 <h5 id="timeTakenString" class="time-label">{{timeTakenString}}</h5>
-                                <a id="outputBtn" href="{{outputFilePath}}" download="{{outputFilename}}" class="btn output-button" onclick="copyOutput()" ></a>
+                                <a id="outputBtn" href="{{outputFilepath}}" download="{{outputFilename}}" class="btn output-button" onclick="copyOutput()" ></a>
                             </div>
                         </div>
                         <div class="section-body">
                             <textarea id="outputArea" class="body-textarea {{failed}}" spellcheck="false" name="name" rows="8" disabled>{{outputText}}</textarea>
                             <h5 id="outputFileArea" class="body-file-output-area {{failed}}">
                                 {{outputText}}
-                                <img id="outputImage" class="output-image" src="{{outputFilePath}}" alt="">
+                                <img id="outputImage" class="output-image" src="{{outputFilepath}}" alt="">
                             </h5>
                         </div>
                     </div>
@@ -165,12 +172,5 @@ Author: Suraj Kothari
                 <p>Padlock | Copyright © 2021 | Author: Suraj Kothari</p>
             </div>
         </footer>
-
-        <!-- Bootstrap JavaScript bundle -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
-        <!-- Padlock JavaScript -->
-        <script src="static/main.js"></script>
-        <!-- Jquery CDN (Google) -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </body>
 </html>
