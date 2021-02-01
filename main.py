@@ -8,6 +8,7 @@ import multicrypt
 import time
 from werkzeug.utils import secure_filename
 import os
+import random
 
 app = Flask(__name__)
 UPLOAD_PATH = "static/uploads"
@@ -142,6 +143,11 @@ def padlock():
             timeTakenString = "Time taken: " + time.strftime('%M:%S', time.gmtime(timeTaken))
         else:
             timeTakenString = ""
+
+        # If the filepath is defined, then add a random integer to the end
+        # This will prevent caching in the browser for multiple encryption/decryptions
+        if outputFilepath:
+            outputFilepath += "?temp=" + str(random.randint(1, 1000))
 
         return render_template("padlock.html", inputText=inputArea,
             outputText=outputText, failed=failed, timeTakenString=timeTakenString,
