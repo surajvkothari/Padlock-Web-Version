@@ -71,6 +71,7 @@ function setMessageOption() {
     document.getElementById("fileModeDivider2").style.display = "none";
     // Hide Base64 mode
     document.getElementById("Base64ModeLabel").style.display = "none";
+    setClassicMode() // Default back to classic mode
     // Hide file input area
     document.getElementById("fileInputArea").style.display = "none";
 
@@ -94,6 +95,7 @@ function setFileOption() {
     document.getElementById("fileModeDivider2").style.display = "block";
     // Show Base64 mode
     document.getElementById("Base64ModeLabel").style.display = "block";
+
     // Show file input area and hide the uploaded file text
     document.getElementById("fileInputArea").style.display = "block";
     document.getElementById("fileUploadedText").style.display = "none";
@@ -117,6 +119,7 @@ function setImageOption() {
     // Show file input area and hide the uploaded image text
     document.getElementById("fileInputArea").style.display = "block";
     document.getElementById("fileUploadedText").style.display = "none";
+    setClassicMode() // Default back to classic mode
 
     document.getElementById("uploadText").innerHTML = "Upload an image (.PNG or .JPG)";
     document.getElementById("fileInput").setAttribute("accept", ".png,.jpg");
