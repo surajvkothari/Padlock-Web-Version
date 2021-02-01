@@ -20,6 +20,12 @@ function initialiseSite() {
         document.getElementById("inputArea").style.display = "none";
         document.getElementById("outputArea").style.display = "none";
 
+        // Show the file mode dividers for the cipher mode dropdown
+        document.getElementById("fileModeDivider1").style.display = "block";
+        document.getElementById("fileModeDivider2").style.display = "block";
+        // Show Base64 mode
+        document.getElementById("Base64ModeLabel").style.display = "block";
+
         if (document.getElementById("cipherModeInput").value == "Base64") {
             document.getElementById("uploadText").innerHTML = "Upload a file (any file type)";
             document.getElementById("fileInput").removeAttribute("accept");
