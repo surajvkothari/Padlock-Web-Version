@@ -151,7 +151,7 @@ Author: Suraj Kothari
                             <div class="output-top-content justify-content-between">
                                 <!-- Time taken -->
                                 <h5 id="timeTakenString" class="time-label">{{timeTakenString}}</h5>
-                                <a id="outputBtn" href="{{outputFilepath}}" download="{{outputFilename}}" class="btn output-button" onclick="copyOutput()" ></a>
+                                <a id="outputBtn" class="btn output-button" onclick="copyOutput()" ></a>
                             </div>
                         </div>
                         <div class="section-body">
@@ -172,5 +172,9 @@ Author: Suraj Kothari
                 <p>Padlock | Copyright © 2021 | Author: Suraj Kothari</p>
             </div>
         </footer>
+
+        <script>
+            toggleDownload("{{outputFilepath}}", "{{outputFilename}}");
+        </script>
     </body>
 </html>

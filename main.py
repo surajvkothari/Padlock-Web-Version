@@ -149,6 +149,9 @@ def padlock():
         if outputFilepath:
             outputFilepath += "?temp=" + str(random.randint(1, 1000))
 
+        # Remove non-ascii characters usually found when decrypting
+        outputText.encode("ascii", errors="ignore")
+
         return render_template("padlock.html", inputText=inputArea,
             outputText=outputText, failed=failed, timeTakenString=timeTakenString,
             dataFormatInput=dataFormat, cipherInput=cipher, cipherModeInput=cipherMode,

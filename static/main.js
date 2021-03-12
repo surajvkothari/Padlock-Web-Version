@@ -3,6 +3,20 @@ Padlock Web Version - JavaScript
 Author: Suraj Kothari
 */
 
+window.onclick = function(event) {
+    // Close any dropdown if the user clicks outside of it
+    // Reference: https://www.w3schools.com/howto/howto_js_dropdown.asp
+    if (!event.target.matches('.dropdown-btn')) {
+        var dropdowns = document.getElementsByClassName("dropdown-body");
+        for (var i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+            }
+        }
+    }
+}
+
 function initialiseSite() {
     /* Initialises the site upon refresh */
     if (document.getElementById("dataFormatInput").value == "Messages") {
@@ -67,23 +81,28 @@ function setMessageOption() {
     document.getElementById("dataFormatInput").setAttribute("value", "Messages");
     // Set output button to a copy button
     document.getElementById("outputBtn").classList.add("copy");
-    document.getElementById("outputBtn").value = "Copy Message";
+    document.getElementById("outputBtn").innerHTML = "Copy Message";
     // Show mode area and input/output text boxes
     document.getElementById("modeArea").style.display = "block";
     document.getElementById("inputArea").style.display = "block";
     document.getElementById("outputArea").style.display = "block";
+    document.getElementById("inputArea").innerHTML = "";
+    document.getElementById("outputArea").innerHTML = "";
+
     // Hide the file mode dividers for the cipher mode dropdown
     document.getElementById("fileModeDivider1").style.display = "none";
     document.getElementById("fileModeDivider2").style.display = "none";
     // Hide Base64 mode
     document.getElementById("Base64ModeLabel").style.display = "none";
-    setClassicMode() // Default back to classic mode
+
     // Hide file input area
     document.getElementById("fileInputArea").style.display = "none";
+    document.getElementById("fileUploadedText").style.display = "none";
 
-    document.getElementById("inputArea").innerHTML = "";
-    document.getElementById("outputArea").innerHTML = "";
+    document.getElementById("timeTakenString").innerHTML = "";
     document.getElementById("outputFileArea").style.display = "none";
+    toggleDownload("", "");  // Remove download functionality
+    setClassicMode(); // Default back to classic mode
 }
 
 function setFileOption() {
@@ -110,6 +129,8 @@ function setFileOption() {
     document.getElementById("fileInput").setAttribute("accept", ".txt");
     document.getElementById("timeTakenString").innerHTML = "";
     document.getElementById("outputFileArea").innerHTML = "";
+    toggleDownload("", "");  // Remove download functionality
+    setClassicMode();  // Default back to classic mode
 }
 
 function setImageOption() {
@@ -125,12 +146,13 @@ function setImageOption() {
     // Show file input area and hide the uploaded image text
     document.getElementById("fileInputArea").style.display = "block";
     document.getElementById("fileUploadedText").style.display = "none";
-    setClassicMode() // Default back to classic mode
 
     document.getElementById("uploadText").innerHTML = "Upload an image (.PNG or .JPG)";
     document.getElementById("fileInput").setAttribute("accept", ".png,.jpg");
     document.getElementById("timeTakenString").innerHTML = "";
     document.getElementById("outputFileArea").innerHTML = "";
+    toggleDownload("", "");  // Remove download functionality
+    setClassicMode(); // Default back to classic mode
 }
 
 
@@ -248,21 +270,6 @@ function setBase64Mode() {
     document.getElementById("uploadText").innerHTML = "Upload a file (any file type)";
     document.getElementById("fileInput").removeAttribute("accept");
 
-}
-
-
-window.onclick = function(event) {
-    // Close any dropdown if the user clicks outside of it
-    // Reference: https://www.w3schools.com/howto/howto_js_dropdown.asp
-    if (!event.target.matches('.dropdown-btn')) {
-        var dropdowns = document.getElementsByClassName("dropdown-body");
-        for (var i = 0; i < dropdowns.length; i++) {
-            var openDropdown = dropdowns[i];
-            if (openDropdown.classList.contains('show')) {
-                openDropdown.classList.remove('show');
-            }
-        }
-    }
 }
 
 function checkInputValidation() {
@@ -430,5 +437,18 @@ function updateFileInputArea() {
         fileUploadedText.innerHTML = "Image uploaded: " + filename;
     } else {
         fileUploadedText.innerHTML = "File uploaded: " + filename;
+    }
+}
+
+function toggleDownload(filepath, filename) {
+    outputBtn = document.getElementById("outputBtn");
+    if (filename !== "") {
+        outputBtn.setAttribute("href", filepath);
+        outputBtn.setAttribute("download", filename);
+
+    }
+    else {
+        outputBtn.removeAttribute("download");
+        outputBtn.removeAttribute("href");
     }
 }
