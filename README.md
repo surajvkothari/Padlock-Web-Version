@@ -1,6 +1,24 @@
 # Padlock - Web Version
-An online site for the desktop software "Padlock" using Flask
+Padlock - Web Version is an online site that allows users to encrypt/decrypt various forms of data.
 
-## Website
-The site is hosted on pythonanywhere.
-URL: [Padlock - Web Version](surajvkothari.pythonanywhere.com/padlock)
+## URL
+[Padlock - Web Version](surajvkothari.pythonanywhere.com/padlock)
+
+## Features
+Encryption/Decryption of:
+  * Messages
+  * Files
+  * Images
+  
+Encryptions avaiable:
+  * Caesar Cipher
+  * Vigenere Cipher
+  * DES
+  * Triple DES
+  * AES
+  * RC4
+
+## Author
+Suraj Kothari
+
+Published: 2021
