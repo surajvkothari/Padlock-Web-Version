@@ -2,7 +2,7 @@
 Padlock - Web Version is an online site that allows users to encrypt/decrypt various forms of data.
 
 ## URL
-[Padlock - Web Version](surajvkothari.pythonanywhere.com/padlock)
+[Padlock - Web Version](http://surajvkothari.pythonanywhere.com/padlock)
 
 ## Features
 Encryption/Decryption of:
