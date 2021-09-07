@@ -14,10 +14,6 @@ import itertools
 import time
 
 
-def getBinary(denary):
-    return bin(denary)[2:][:4]
-
-
 def getEncryptedPixel(input_pixel, shift, cipherUsed):
     """Encrypts the individual pixels with a shift value"""
 
