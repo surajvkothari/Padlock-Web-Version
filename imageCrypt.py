@@ -41,7 +41,7 @@ def getEncryptedPixel(input_pixel, shift, cipherUsed):
     colourGreen = (G + shift) % 256
     colourBlue = (B + shift) % 256
 
-    # Checks if the image type is PNG and if Triple DES encryption is not used
+    # Checks if the image type is PNG
     if numberOfPixelValues == 4:
         # PNG images have an alpha channel
         A = pixel[3]
