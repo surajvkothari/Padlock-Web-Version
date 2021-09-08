@@ -43,11 +43,6 @@ def getHexedKey(key):
     # Converts list into a string
     hexedKey = "".join(hexedCharsList)
 
-    # Adds padding if key is shorter than 16 hex characters
-    if len(hexedKey) < 16:
-        padding = 16 - len(hexedKey)
-        hexedKey += ("00" * padding)
-
     # Truncates key if it is longer than 16 hex characters
     if len(hexedKey) > 16:
         hexedKey = hexedKey[0:16]
@@ -82,6 +77,8 @@ def getHexedPlainText(plainText):
         The ammount of padding is determined by finding
         the next multiple of 16 closest to the length: ((length // 16) + 1).
         By subtracting this multiple from the actual length, it will give
+        the next multiple of 16 from the length and then
+        subtracting it from the actual length. This will give
         the number of 0s needed to make the length a multiple of 16.
         """
 
