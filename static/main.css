@@ -295,3 +295,12 @@ body {
   background-color: #2A2F33;
   color: #8C8C8C;
 }
+
+
+/* Footer at bottom of mobile site */
+@media only screen and (max-width: 900px) {
+    .footer {
+        position: relative;
+        font-size: 11px;
+    }
+}
