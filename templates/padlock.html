@@ -8,14 +8,18 @@ Author: Suraj Kothari
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+
         <!-- Padlock icon -->
         <link rel="icon" href="/static/favicon.ico">
+
         <!-- Bootstrap CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
             rel="stylesheet"
             integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
             crossorigin="anonymous">
-        <link rel="stylesheet" href="/static/main.css"> <!-- Padlock CSS -->
+        <!-- Padlock CSS -->
+        <link rel="stylesheet" href="/static/main.css">
+
         <!-- Bootstrap JavaScript bundle -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
         <!-- Jquery CDN (Google) -->
@@ -27,15 +31,15 @@ Author: Suraj Kothari
     </head>
     <body onload="initialiseSite()">
         <!-- Top header -->
-        <div class="container-fluid padlock-header">
+        <div class="container-fluid padlock-header p-4">
             <!-- Logo refreshes site -->
             <a href="/padlock" style="text-decoration: none;">
-                <h1 class="display-4 padlock-logo">Padlock</h1>
+                <h1 class="padlock-logo">Padlock</h1>
             </a>
         </div>
 
         <!-- Main body -->
-        <div class="container-fluid padlock-body">
+        <div class="container-fluid main-body">
             <!-- Main form -->
             <form id="padlockForm" action="/padlock" method="POST" enctype="multipart/form-data">
                 <!-- Inputs to be submitted to Flask -->
@@ -46,28 +50,28 @@ Author: Suraj Kothari
                 <input id="fileInput" type="file" name="fileInput" style="display: none;">
 
                 <!-- Main row -->
-                <div class="row padlock-main-row">
+                <div class="row main-row">
                     <!-- Input section -->
                     <div class="col input-section main-section">
                         <div class="section-top">
-                            <h2 class="section-title">INPUT</h2>
+                            <h4 class="section-title">INPUT</h4>
                             <!-- Data format dropdown -->
                             <div class="dropdown">
-                                <h1 id="activeDataFormat" onclick="showDataFormatDropdown()" class="dropdown-btn">{{dataFormatInput.upper()}} &#x25BC;</h1>
-                                <div id="dataFormatDropdown" class="dropdown-body">
-                                    <a onclick="setMessageOption()">MESSAGES</a>
-                                    <a onclick="setFileOption()">FILES</a>
-                                    <a onclick="setImageOption()">IMAGES</a>
+                                <h5 id="activeDataFormatLabel" onclick="showDataFormatDropdown()" class="dropdown-btn"></h5>
+                                <div id="dataFormatDropdown" class="dropdown-body shadow-lg">
+                                    <p onclick="setMessageOption()">Messages</p>
+                                    <p onclick="setFileOption()">Files</p>
+                                    <p onclick="setImageOption()">Images</p>
                                 </div>
                             </div>
                         </div>
                         <div class="section-body">
                             <textarea id="inputArea" class="body-textarea" spellcheck="false" name="inputArea" form="padlockForm" rows="8" placeholder="Enter messages...">{{inputText}}</textarea>
                             <div id="fileInputArea" class="file-input-box">
-                                <h6 id="fileUploadedText" class="file-uploaded-text"></h6>
                                 <!-- File upload icon -->
                                 <img src="/static/file_upload_icon.png" height="50">
-                                <h5 id="uploadText" class="upload-text" onclick="uploadFile()"></h5>
+                                <h6 id="uploadText" class="upload-text" onclick="uploadFile()"></h6>
+                                <h6 id="fileUploadedText" class="file-uploaded-text"></h6>
                             </div>
                         </div>
                     </div>
@@ -75,46 +79,46 @@ Author: Suraj Kothari
                     <!-- Process section -->
                     <div class="col process-section main-section">
                         <div class="section-top">
-                            <h2 class="section-title">PROCESS</h2>
+                            <h4 class="section-title">PROCESS</h4>
                             <!-- Cipher mode dropdown -->
                             <div class="dropdown">
-                                <h1 id="activeCipher" onclick="showCipherDropdown()" class="dropdown-btn">{{cipherInput}} &#x25BC;</h1>
-                                <div id="cipherDropdown" class="dropdown-body">
-                                    <a class="dropdown-dividers" style="color: #5B6D46;">Weak Ciphers</a>
-                                    <a onclick="setCaesarOption()">Caesar Cipher</a>
-                                    <a onclick="setVigenereOption()">Vigenere Cipher</a>
-                                    <a class="dropdown-dividers" style="color: #FFF0C4;">Medium Ciphers</a>
-                                    <a onclick="setDESOption()">DES</a>
-                                    <a onclick="setTDESOption()">Triple DES</a>
-                                    <a class="dropdown-dividers" style="color: #F44336;">Strong Ciphers</a>
-                                    <a onclick="setAESOption()">AES</a>
-                                    <a onclick="setRC4Option()">RC4</a>
+                                <h5 id="activeCipher" onclick="showCipherDropdown()" class="dropdown-btn">{{cipherInput}} &#x25BC;</h5>
+                                <div id="cipherDropdown" class="dropdown-body shadow-lg">
+                                    <p class="dropdown-dividers" style="color: #388E3C;">Weak Ciphers</p>
+                                    <p onclick="setCaesarOption()">Caesar Cipher</p>
+                                    <p onclick="setVigenereOption()">Vigenere Cipher</p>
+                                    <p class="dropdown-dividers" style="color: #FBC02D;">Medium Ciphers</p>
+                                    <p onclick="setDESOption()">DES</p>
+                                    <p onclick="setTDESOption()">Triple DES</p>
+                                    <p class="dropdown-dividers" style="color: #F44336;">Strong Ciphers</p>
+                                    <p onclick="setAESOption()">AES</p>
+                                    <p onclick="setRC4Option()">RC4</p>
                                 </div>
                             </div>
                         </div>
                         <div class="section-body">
-                            <div id="keyArea" class="key-area">
+                            <div id="keyArea">
                                 <div class="d-flex">
                                     <h5 class="key-input-label">KEY</h5>
                                     <h5 id="key1Error" class="error-input-label"></h5>
                                 </div>
-                                <input id="keyInput" class="input-group input-group-sm key-input" type="text" name="keyInput" autocomplete="off" placeholder="Enter key...">
+                                <input id="keyInput" class="input-group input-group-sm key-input" type="text" name="keyInput" autocomplete="off">
                             </div>
                             <!-- For Triple DES ONLY -->
                             <div id="tDESKeys" style="display: none;">
-                                <div id="keyArea2" class="key-area">
+                                <div id="keyArea2">
                                     <div class="d-flex">
                                         <h5 class="key-input-label extra-keys">KEY 2</h5>
                                         <h5  id="key2Error" class="error-input-label">ERROR</h5>
                                     </div>
-                                    <input id="keyInput2" class="input-group input-group-sm key-input" type="text" name="keyInput2" autocomplete="off" placeholder="Enter second key...">
+                                    <input id="keyInput2" class="input-group input-group-sm key-input" type="text" name="keyInput2" autocomplete="off">
                                 </div>
-                                <div id="keyArea3" class="key-area">
+                                <div id="keyArea3">
                                     <div class="d-flex">
                                         <h5 class="key-input-label extra-keys">KEY 3</h5>
                                         <h5  id="key3Error" class="error-input-label">ERROR</h5>
                                     </div>
-                                    <input id="keyInput3" class="input-group input-group-sm key-input" type="text" name="keyInput3" autocomplete="off" placeholder="Enter third key...">
+                                    <input id="keyInput3" class="input-group input-group-sm key-input" type="text" name="keyInput3" autocomplete="off">
                                 </div>
                             </div>
 
@@ -125,20 +129,20 @@ Author: Suraj Kothari
                                     <h5 class="mode-input-label">MODE</h5>
                                 </div>
                                 <div class="dropdown">
-                                    <h1 id="activeCipherMode" onclick="showCipherModeDropdown()" class="dropdown-btn small-dropdown">{{cipherModeInput}} &#x25BC;</h1>
-                                    <div id="cipherModeDropdown" class="dropdown-body">
-                                        <a id="fileModeDivider1" class="dropdown-dividers" style="display: none">Text files only</a>
-                                        <a onclick="setClassicMode()">Classic</a>
-                                        <a id="ASCIIModeLabel" onclick="setASCIIMode()">ASCII</a>
-                                        <a id="fileModeDivider2" class="dropdown-dividers" style="display: none">For all other file types</a>
-                                        <a id="Base64ModeLabel" onclick="setBase64Mode()" style="display: none;">Base64</a>
+                                    <h6 id="activeCipherMode" onclick="showCipherModeDropdown()" class="dropdown-btn">{{cipherModeInput}} &#x25BC;</h6>
+                                    <div id="cipherModeDropdown" class="dropdown-body shadow-lg">
+                                        <p id="fileModeDivider1" class="dropdown-dividers" style="display: none">For Text files</p>
+                                        <p onclick="setClassicMode()">Classic</p>
+                                        <p id="ASCIIModeLabel" onclick="setASCIIMode()">ASCII</p>
+                                        <p id="fileModeDivider2" class="dropdown-dividers" style="display: none">For other file types</p>
+                                        <p id="Base64ModeLabel" onclick="setBase64Mode()" style="display: none;">Base64</p>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="d-flex justify-content-between encrypt-decrypt-mode">
-                                <h5 id="encryptModeTag" class="btn btn-success" onclick="startEncrypt()">ENCRYPT</h5>
-                                <h5 id="decryptModeTag" class="btn btn-danger" onclick="startDecrypt()">DECRYPT</5>
+                                <button id="encryptModeTag" class="btn btn-success" onclick="startEncrypt()">ENCRYPT</button>
+                                <button id="decryptModeTag" class="btn btn-danger" onclick="startDecrypt()">DECRYPT</button>
                             </div>
                         </div>
 
@@ -147,19 +151,18 @@ Author: Suraj Kothari
                     <!-- Output section -->
                     <div class="col output-section main-section">
                         <div class="section-top">
-                            <h2 class="section-title" style="margin-bottom: 17px">OUTPUT</h2>
-                            <div class="output-top-content justify-content-between">
-                                <!-- Time taken -->
-                                <h5 id="timeTakenString" class="time-label">{{timeTakenString}}</h5>
-                                <a id="outputBtn" class="btn output-button" onclick="copyOutput()" ></a>
-                            </div>
+                            <h4 class="section-title">OUTPUT</h4>
+                            <a id="outputBtn" class="btn output-button" onclick="copyOutput()" ></a>
                         </div>
                         <div class="section-body">
-                            <textarea id="outputArea" class="body-textarea {{failed}}" spellcheck="false" name="name" rows="8" disabled>{{outputText}}</textarea>
-                            <h5 id="outputFileArea" class="body-file-output-area {{failed}}">
-                                {{outputText}}
+                            <textarea id="outputArea" class="body-textarea {{failed}}" spellcheck="false" name="name" rows="8" placeholder="Output..." disabled>{{outputText}}</textarea>
+                            <div id="outputFileArea" class="{{failed}}">
+                                <p>{{outputText}}</p>
+                                <br>
+                                <!-- Time taken -->
+                                <h5 id="timeTakenString" class="time-label">{{timeTakenString}}</h5>
                                 <img id="outputImage" class="output-image" src="{{outputFilepath}}" alt="">
-                            </h5>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -167,11 +170,11 @@ Author: Suraj Kothari
         </div>
 
         <!-- Footer -->
-        <footer class="footer">
-            <div style="padding: 0 48px;">
-                <p>Padlock | Copyright © 2021 | Author: Suraj Kothari</p>
-            </div>
-        </footer>
+        <!--<footer class="footer mt-auto">-->
+        <!--    <div style="padding: 8px 48px;">-->
+        <!--        <p class="footer-text">Padlock | Copyright © 2019 | Author: Suraj Kothari</p>-->
+        <!--    </div>-->
+        <!--</footer>-->
 
         <script>
             toggleDownload("{{outputFilepath}}", "{{outputFilename}}");
