@@ -22,7 +22,7 @@ def clear_files():
 @app.route('/padlock', methods=['POST', 'GET'])
 def padlock():
     # Remove files stored in uploads
-    clear_files()
+    #clear_files()
 
     if request.method == "POST":
         timeTaken = 0
@@ -69,7 +69,7 @@ def padlock():
 
                     # Remove path from output file and return just the filename
                     outputFilename = os.path.basename(outputFilepath)
-                    outputText = Markup("File encryption successful!<br>Filename: " + outputFilename)
+                    outputText = f"Filename: {outputFilename}"
                 except Exception as e:
                     outputText = "ERROR: File encryption failed!"
                     failed = "failed"
@@ -86,7 +86,7 @@ def padlock():
 
                     # Remove path from output file and return just the filename
                     outputFilename = os.path.basename(outputFilepath)
-                    outputText = Markup("Image encryption successful!<br>Filename: " + outputFilename)
+                    outputText = f"Filename: {outputFilename}"
                 except Exception as e:
                     outputText = "ERROR: Image encryption failed!"
                     failed = "failed"
@@ -115,7 +115,7 @@ def padlock():
 
                     # Remove path from output file and return just the filename
                     outputFilename = os.path.basename(outputFilepath)
-                    outputText = Markup("File decryption successful!<br>Filename: " + outputFilename)
+                    outputText = f"Filename: {outputFilename}"
                 except Exception as e:
                     outputText = "ERROR: File decryption failed!"
                     failed = "failed"
@@ -132,7 +132,7 @@ def padlock():
 
                     # Remove path from output file and return just the filename
                     outputFilename = os.path.basename(outputFilepath)
-                    outputText = Markup("Image decryption successful!<br>Filename: " + outputFilename)
+                    outputText = f"Filename: {outputFilename}"
                 except Exception as e:
                     outputText = "ERROR: Image decryption failed!"
                     failed = "failed"
