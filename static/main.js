@@ -20,6 +20,7 @@ window.onclick = function(event) {
 function initialiseSite() {
     /* Initialises the site upon refresh */
     if (document.getElementById("dataFormatInput").value == "Messages") {
+        document.getElementById("activeDataFormatLabel").innerHTML = "Messages &#x25BC;";
         document.getElementById("outputFileArea").style.display = "none";
         // Set output button to a copy button
         document.getElementById("outputBtn").innerHTML = "Copy message";
@@ -29,6 +30,7 @@ function initialiseSite() {
     }
 
     else if (document.getElementById("dataFormatInput").value == "Files") {
+        document.getElementById("activeDataFormatLabel").innerHTML = "Files &#x25BC;";
         document.getElementById("fileInputArea").style.display = "block";
         // Hide input and output text boxes
         document.getElementById("inputArea").style.display = "none";
@@ -54,6 +56,7 @@ function initialiseSite() {
     }
 
     else if (document.getElementById("dataFormatInput").value == "Images") {
+        document.getElementById("activeDataFormatLabel").innerHTML = "Images &#x25BC;";
         document.getElementById("fileInputArea").style.display = "block";
         // Hide input and output text boxes
         document.getElementById("inputArea").style.display = "none";
@@ -77,7 +80,7 @@ function initialiseSite() {
 // Set data format dropdown options
 function showDataFormatDropdown() {document.getElementById("dataFormatDropdown").classList.toggle("show");}
 function setMessageOption() {
-    document.getElementById("activeDataFormat").innerHTML = "MESSAGES &#x25BC;";
+    document.getElementById("activeDataFormatLabel").innerHTML = "Messages &#x25BC;";
     document.getElementById("dataFormatInput").setAttribute("value", "Messages");
     // Set output button to a copy button
     document.getElementById("outputBtn").classList.add("copy");
@@ -106,7 +109,7 @@ function setMessageOption() {
 }
 
 function setFileOption() {
-    document.getElementById("activeDataFormat").innerHTML = "FILES &#x25BC;";
+    document.getElementById("activeDataFormatLabel").innerHTML = "Files &#x25BC;";
     document.getElementById("dataFormatInput").setAttribute("value", "Files");
     // Set output button to a download button
     document.getElementById("outputBtn").classList.remove("copy");
@@ -134,7 +137,7 @@ function setFileOption() {
 }
 
 function setImageOption() {
-    document.getElementById("activeDataFormat").innerHTML = "IMAGES &#x25BC;";
+    document.getElementById("activeDataFormatLabel").innerHTML = "Images &#x25BC;";
     document.getElementById("dataFormatInput").setAttribute("value", "Images");
     // Set output button to a download button
     document.getElementById("outputBtn").classList.remove("copy");
@@ -157,7 +160,11 @@ function setImageOption() {
 
 
 // Set cipher dropdown options
-function showCipherDropdown() {document.getElementById("cipherDropdown").classList.toggle("show");}
+function showCipherDropdown() {
+    document.getElementById("cipherDropdown").classList.toggle("show");
+    document.getElementById("cipherModeDropdown").classList.remove("show");
+}
+
 function setCaesarOption() {
     document.getElementById("activeCipher").innerHTML = "Caesar Cipher &#x25BC;";
     document.getElementById("cipherInput").setAttribute("value", "Caesar Cipher");
@@ -244,7 +251,11 @@ function setRC4Option() {
 
 
 // Set Cipher mode dropwdown
-function showCipherModeDropdown() {document.getElementById("cipherModeDropdown").classList.toggle("show");}
+function showCipherModeDropdown() {
+    document.getElementById("cipherModeDropdown").classList.toggle("show");
+    document.getElementById("cipherDropdown").classList.remove("show");
+}
+
 function setClassicMode() {
     document.getElementById("activeCipherMode").innerHTML = "Classic &#x25BC;";
     document.getElementById("cipherModeInput").setAttribute("value", "Classic");
@@ -350,8 +361,6 @@ function startEncrypt() {
                     document.getElementById("fileUploadedText").innerHTML = "File too large! Please select a file less than 1MB for encryption.";
                 }
                 return 0;  // Don't proceed to encrypt
-            } else {
-
             }
         }
 

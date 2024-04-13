@@ -11,12 +11,12 @@ Author: Suraj Kothari
 body {
     background-color: #1D1D1D;
     color: #fff;
-    font-family: Roboto, sans-serif;
+    font-family: "Source Code Pro", sans-serif;
 }
 
 .padlock-header {
-    padding: 16px 64px;
     background-color: #2A2F33;
+    box-shadow: 0px 4px 24px 12px #202427
 }
 
 .padlock-logo {
@@ -24,15 +24,17 @@ body {
     color: #FFB300;
 }
 
-.padlock-body {
-    padding: 48px 5%;
+
+.main-body {
+    margin: 20vh 0;
 }
 
-
 .main-section {
-    padding: 16px;
+    padding: 1rem;
     background-color: #2D2D2D;
-    margin: 5% 1%;
+    margin: 0 3rem;
+    box-shadow: 0 0 8px 1px #404040;
+    border-radius: 16px;
 }
 
 .output-top-content {
@@ -41,31 +43,23 @@ body {
 
 
 /* Move columns vertically */
-@media only screen and (max-width: 900px) {
-    .row {
+@media only screen and (max-width: 1200px) {
+    .main-row {
         display: block;
-    }
-}
-
-/* Move button and output top text vertically */
-@media only screen and (max-width: 1100px) {
-    .output-top-content {
-        display: block;
-        text-align: center;
+        padding: 0 3rem;
     }
 
-    .output-button {
-        margin: 10px 0;
+    .main-section {
+        margin: 3rem 0;
     }
 }
 
 
 .section-title {
     text-align: center;
-    font-size: 20px;
     font-weight: bold;
     color: #FFB300;
-    margin-bottom: 27px;
+    margin-bottom: 1rem;
 }
 
 .section-top {
@@ -76,7 +70,6 @@ body {
 /* Reference: https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_js_dropdown */
 .dropdown-btn {
   color: #FFB300;
-  font-size: 20px;
   font-weight: bold;
   border: none;
   cursor: pointer;
@@ -97,27 +90,22 @@ body {
 .dropdown-body {
   display: none;
   position: absolute;
-  background-color: #F5B250;
+  background-color: #ECEFF1;
   color: #2F2F2F;
-  min-width: 220px;
+  width: 250px;
   overflow: auto;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
   cursor: pointer;
 }
 
-.dropdown-body a {
-  padding: 12px 28px;
-  text-decoration: none;
-  display: block;
+.dropdown-body p {
+  margin: 1rem 0;
+  padding: 1rem 0;
+  text-align: center;
 }
 
-.dropdown a:hover:not(.dropdown-dividers) {
-    background-color: #DDD;
-}
-
-.small-dropdown {
-    font-size: 16px;
+.dropdown p:hover:not(.dropdown-dividers) {
+    background-color: #FBB300;
 }
 
 .show {
@@ -125,20 +113,19 @@ body {
 }
 
 .section-body {
-    padding-top: 16px;
+    padding: 1rem 0;
 }
 
 .body-textarea {
     font-family: "Source Code Pro", monospace;
     font-weight: bold;
     font-size: 16px;
-    color: #CFD8DC;
     width: 100%;
-    padding: 16px;
+    padding: 1rem;
     resize: none;
-    border: 2px solid #FFF;
-    border-radius: 4px;
-    background: none;
+    border: 3px solid #9E9E9E;
+    border-radius: 8px;
+    background-color: #ECEFF1;
     outline: none;
 }
 
@@ -149,7 +136,7 @@ body {
 }
 
 .body-textarea::-webkit-scrollbar-thumb {
-  background-color: #F5B250;
+  background-color: #FFB300;
   border-radius: 10px;
 }
 
@@ -158,22 +145,15 @@ body {
     border-radius: 10px;
 }
 
-.key-area {
-    padding: 0 5px;
-}
-
 .mode-area {
     border-top: 3px solid #3E3E3E;
-    /* border-bottom: 3px solid #3E3E3E; */
-    padding: 10px 5px;
-    margin-top: 16px;
+    padding: 1rem 0;
+    margin-top: 1rem;
 }
 
 .mode-input-label {
-    width: 40px;
     font-size: 16px;
     font-weight: bold;
-    padd
 }
 
 .key-error {
@@ -184,7 +164,6 @@ body {
     width: 40px;
     font-size: 16px;
     font-weight: bold;
-    border-right: 2px solid #3E3E3E;
 }
 
 .extra-keys {
@@ -205,13 +184,18 @@ body {
     padding: 12px 16px;
     margin-bottom: 10px;
     outline: none;
-    border-radius: 4px;
+    border-radius: 8px;
+    border: 3px solid #9E9E9E;
+    background-color: #F5F5F5;
 }
 
 .encrypt-decrypt-mode {
-    text-align: center;
-    margin-top: 20px;
-    padding: 0 5px;
+    margin-top: 1rem;
+}
+
+.encrypt-decrypt-mode button {
+    font-weight: bold;
+    box-shadow: 0px 0px 4px 2px #404040;
 }
 
 .process-mode {
@@ -227,8 +211,7 @@ body {
 .dropdown-dividers {
     color: #2F2F2F;
     padding: 12px 5px !important;
-    border-top: 1px solid #2D2D2D;
-    border-bottom: 1px solid #2D2D2D;
+    border-bottom: 3px solid #BDBDBD;
 }
 
 .dropdown-dividers:hover {
@@ -242,6 +225,7 @@ body {
     color: #2F2F2F;
     margin-bottom: 10px;
     background-color: #FBB300;
+    box-shadow: 0px 0px 4px 2px #404040;
 }
 
 .output-button:hover {
@@ -258,10 +242,9 @@ body {
 }
 
 .upload-text {
-    margin: 20px 0;
+    margin: 1rem 0;
     font-weight: bold;
     cursor: pointer;
-    font-size: 18px;
 }
 
 .file-uploaded-text {
@@ -286,21 +269,23 @@ body {
     border: 5px solid #3E3E3E;
 }
 
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 60px; /* Set the fixed height of the footer here */
-  line-height: 60px; /* Vertically center the text there */
-  background-color: #2A2F33;
-  color: #8C8C8C;
-}
+/* Footer Removed */
+
+/*.footer {*/
+/*  width: 100%;*/
+/*  background-color: #2A2F33;*/
+/*  color: #8C8C8C;*/
+/*}*/
+
+/*.footer-text {*/
+/*    margin: 16px 0;*/
+/*}*/
 
 
 /* Footer at bottom of mobile site */
-@media only screen and (max-width: 900px) {
-    .footer {
-        position: relative;
-        font-size: 11px;
-    }
-}
+/*@media only screen and (max-width: 900px) {*/
+/*    .footer {*/
+/*        position: relative;*/
+/*        font-size: 11px;*/
+/*    }*/
+/*}*/
